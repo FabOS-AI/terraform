@@ -45,8 +45,8 @@ RUN echo "credentials \"gitlab.cc-asp.fraunhofer.de\" {\n  token = \"${GITLAB_AC
 RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
     install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
-COPY replace_gitlab_token.sh write_ansible_vault_file.sh /root/
+COPY consul_login.sh replace_gitlab_token.sh write_ansible_vault_file.sh /root/
 
 WORKDIR /project
 
-ENTRYPOINT /root/replace_gitlab_token.sh; /root/write_ansible_vault_file.sh; sleep infinity
+ENTRYPOINT /root/consul_login.sh; /root/replace_gitlab_token.sh; /root/write_ansible_vault_file.sh; sleep infinity
