@@ -47,6 +47,8 @@ RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/s
 
 COPY consul_login.sh replace_gitlab_token.sh write_ansible_vault_file.sh /root/
 
+RUN chmod +x consul_login.sh replace_gitlab_token.sh write_ansible_vault_file.sh
+
 WORKDIR /project
 
 ENTRYPOINT /root/consul_login.sh; /root/replace_gitlab_token.sh; /root/write_ansible_vault_file.sh; sleep infinity
